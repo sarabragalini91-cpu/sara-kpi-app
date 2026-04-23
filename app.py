@@ -178,9 +178,26 @@ def livello(totale):
 def play_fire_sound():
     components.html(
         """
-        <audio autoplay>
-            <source src="https://www.soundjay.com/buttons/sounds/button-09.mp3" type="audio/mpeg">
-        </audio>
+        <script>
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        function beep(freq, start, duration) {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = "square";
+            osc.frequency.value = freq;
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            gain.gain.setValueAtTime(0.12, audioCtx.currentTime + start);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + start + duration);
+            osc.start(audioCtx.currentTime + start);
+            osc.stop(audioCtx.currentTime + start + duration);
+        }
+
+        beep(500, 0, 0.15);
+        beep(750, 0.18, 0.15);
+        beep(1000, 0.36, 0.22);
+        </script>
         """,
         height=0,
     )
