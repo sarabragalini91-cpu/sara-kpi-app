@@ -60,11 +60,11 @@ def load_data():
     indiretto_cu = clean(sheet.acell("C8").value)
     indiretto_venditori = clean(sheet.acell("C11").value)
     geko = clean(sheet.acell("C14").value)
-    rinnovi = clean(sheet.acell("M20").value)
-    referral = clean(sheet.acell("M26").value)
-    vendita_cnp = clean(sheet.acell("M32").value)
-    royalties = clean(sheet.acell("M38").value)
-    cross = clean(sheet.acell("M44").value)
+    rinnovi = clean(sheet.acell("O20").value)
+    referral = clean(sheet.acell("O26").value)
+    vendita_cnp = clean(sheet.acell("O32").value)
+    royalties = clean(sheet.acell("O38").value)
+    cross = clean(sheet.acell("O44").value)
 
     totale = (
         fisso + indiretto_cu + indiretto_venditori +
