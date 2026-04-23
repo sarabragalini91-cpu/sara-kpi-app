@@ -19,7 +19,8 @@ def load_data():
         "https://spreadsheets.google.com/feeds",
         "https://www.googleapis.com/auth/drive",
     ]
-    creds = ServiceAccountCredentials.from_json_keyfile_name("credenziali.json", scope)
+    service_account_info = dict(st.secrets["gcp_service_account"])
+creds = ServiceAccountCredentials.from_json_keyfile_dict(service_account_info, scope)
     client = gspread.authorize(creds)
 
     sheet = client.open_by_key(SHEET_ID).worksheet(TAB_NAME)
