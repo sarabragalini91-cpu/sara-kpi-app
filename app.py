@@ -34,10 +34,13 @@ SHEET_ID = "1BoU7ADi3BZKFqP9tYVE3LeaZ3FPndmVh0TgRM9cBTOg"
 TAB_NAME = "2026"
 
 def clean(val):
-    if val is None or val == "":
+    try:
+        if val is None or val == "":
+            return 0.0
+        val = str(val).replace("€", "").replace(".", "").replace(",", ".").strip()
+        return float(val)
+    except:
         return 0.0
-    val = str(val).replace("€", "").replace(".", "").replace(",", ".").strip()
-    return float(val)
 
 @st.cache_data(ttl=10)
 def load_data():
