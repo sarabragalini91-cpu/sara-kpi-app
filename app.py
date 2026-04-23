@@ -181,22 +181,28 @@ def play_fire_sound():
         <script>
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
-        function beep(freq, start, duration) {
+        function tone(freq, start, duration, type="sine", volume=0.08) {
             const osc = audioCtx.createOscillator();
             const gain = audioCtx.createGain();
-            osc.type = "square";
+
+            osc.type = type;
             osc.frequency.value = freq;
             osc.connect(gain);
             gain.connect(audioCtx.destination);
-            gain.gain.setValueAtTime(0.12, audioCtx.currentTime + start);
+
+            gain.gain.setValueAtTime(volume, audioCtx.currentTime + start);
             gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + start + duration);
+
             osc.start(audioCtx.currentTime + start);
             osc.stop(audioCtx.currentTime + start + duration);
         }
 
-        beep(500, 0, 0.15);
-        beep(750, 0.18, 0.15);
-        beep(1000, 0.36, 0.22);
+        // Cash / slot machine vibe
+        tone(880, 0.00, 0.08, "triangle", 0.06);
+        tone(1175, 0.10, 0.08, "triangle", 0.06);
+        tone(1568, 0.20, 0.10, "triangle", 0.07);
+        tone(2093, 0.34, 0.18, "sine", 0.09);
+        tone(2637, 0.52, 0.22, "sine", 0.07);
         </script>
         """,
         height=0,
